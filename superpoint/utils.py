@@ -540,7 +540,7 @@ def select_top_k(corners, num=300):
 
 def plot_imgs(imgs, title=None, cmap='brg', ylabel=None, normalize=False, ax=None, dpi=100):
     #plt.rcParams.update({'font.size': 16})
-    plt.rc('font', size=16)
+    # plt.rc('font', size=16)
     m = len(imgs)
     n = len(imgs[0])
     if not isinstance(cmap, list):
@@ -566,10 +566,9 @@ def plot_imgs(imgs, title=None, cmap='brg', ylabel=None, normalize=False, ax=Non
                 spine.set_visible(False)
         ax[i][0].set_ylabel(ylabel[i])
     for i in range(n):
-        ax[0][i].set_title(title)
-        ax[0][i].title.set_fontsize(16)
+        ax[0][i].set_title(title, size=20)
     plt.tight_layout()
-    plt.savefig('detector1.png', dpi=200)
+    # plt.savefig('detector1.png', dpi=200)
     plt.show()
 
 

@@ -153,7 +153,7 @@ def match(imgs1, imgs2, fe):
         # ax[3].imshow(img4)
 
     plt.tight_layout()
-    plt.savefig('matcher.png')
+    # plt.savefig('matcher.png')
     plt.show()
 
 if __name__ == '__main__':
@@ -191,17 +191,17 @@ if __name__ == '__main__':
     print('==> Successfully loaded pre-trained network.')
 
     # corner detector
-    img0 = vs.read_image(vs.listing[0], vs.sizer)
-    img1 = vs.read_image(vs.listing[1], vs.sizer)
-    corner_display([img0, img1], fe)
+    # img0 = vs.read_image(vs.listing[0], vs.sizer)
+    # img1 = vs.read_image(vs.listing[1], vs.sizer)
+    # corner_display([img0, img1], fe)
 
     # matcher
-    # l = len(vs.listing)
-    # x = []
-    # y = []
-    # for i in range(l):
-    #     if i % 2 == 0:
-    #         x.append(vs.read_image(vs.listing[i], vs.sizer))
-    #     else:
-    #         y.append(vs.read_image(vs.listing[i], vs.sizer))
-    # match(x, y, fe)
+    l = len(vs.listing)
+    x = []
+    y = []
+    for i in range(l):
+        if i % 2 == 0:
+            x.append(vs.read_image(vs.listing[i], vs.sizer))
+        else:
+            y.append(vs.read_image(vs.listing[i], vs.sizer))
+    match(x, y, fe)
