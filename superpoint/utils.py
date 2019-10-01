@@ -538,15 +538,13 @@ def select_top_k(corners, num=300):
     return pts
 
 
-def plot_imgs(imgs, title=None, cmap='brg', ylabel=None, normalize=False, ax=None, dpi=100):
-    #plt.rcParams.update({'font.size': 16})
-    # plt.rc('font', size=16)
+def plot_imgs(imgs, title=None, cmap='brg', ylabel=None, normalize=False, ax=None, dpi=200):
     m = len(imgs)
     n = len(imgs[0])
     if not isinstance(cmap, list):
         cmap = [[cmap]*n for i in range(m)]
     if ax is None:
-        _, ax = plt.subplots(m, n, figsize=(12*n, 24), dpi=dpi)
+        _, ax = plt.subplots(m, n, figsize=(12*n, 20), dpi=dpi)
         if n == 1:
             ax = [ax]
     else:
@@ -555,8 +553,8 @@ def plot_imgs(imgs, title=None, cmap='brg', ylabel=None, normalize=False, ax=Non
         assert len(ax) == len(imgs)
     for i in range(m):
         for j in range(n):
-            if imgs[i][j].shape[-1] == 3:
-                imgs[i][j] = imgs[i][j][..., ::-1]  # BGR to RGB
+            # if imgs[i][j].shape[-1] == 3:
+            #     imgs[i][j] = imgs[i][j][..., ::-1]  # BGR to RGB
             ax[i][j].imshow(imgs[i][j], cmap=plt.get_cmap(cmap[i][j]),
                      vmin=None if normalize else 0,
                      vmax=None if normalize else 1)
@@ -566,9 +564,10 @@ def plot_imgs(imgs, title=None, cmap='brg', ylabel=None, normalize=False, ax=Non
                 spine.set_visible(False)
         ax[i][0].set_ylabel(ylabel[i])
     for i in range(n):
-        ax[0][i].set_title(title, size=20)
+        ax[0][i].set_title(title, fontsize=10)
     plt.tight_layout()
-    # plt.savefig('detector1.png', dpi=200)
+    plt.subplots_adjust(wspace=-0.62, hspace=0.05)
+    plt.savefig('detector.png', dpi=200)
     plt.show()
 
 

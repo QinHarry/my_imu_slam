@@ -7,6 +7,9 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 
+# corner detector: python evaluation.py detector --img_glob *.ppm
+# matches: python evaluation.py matches --img_glob *.ppm
+
 # Stub to warn about opencv version.
 if int(cv2.__version__[0]) < 3: # pragma: no cover
     print('Warning: OpenCV 3 is not installed')
@@ -20,7 +23,7 @@ def corner_display(imgs, fe):
         pts, desc, heatmap = fe.run(img)
         end1 = time.time()
         points = utils.select_top_k(pts)
-        im1.append(utils.draw_keypoints(img, points, (255, 1, 1)))
+        im1.append(utils.draw_keypoints(img, points, (0, 255, 0)))
     # utils.plot_imgs(im1, ylabel='current solution', dpi=200, cmap='gray', titles=titles)
     img_final.append(im1)
     y.append('deep learning')
@@ -36,7 +39,7 @@ def corner_display(imgs, fe):
         pts[2, :] = dst[xs, ys]
         pts, _ = fe.nms_fast(pts, img.shape[0], img.shape[1], dist_thresh=fe.nms_dist)
         points = utils.select_top_k(pts)
-        im2.append(utils.draw_keypoints(img, points, (255, 1, 1)))
+        im2.append(utils.draw_keypoints(img, points, (0, 255, 0)))
     #utils.plot_imgs(im2, ylabel='harris', dpi=200, cmap='gray', titles=titles)
     img_final.append(im2)
     y.append('harris')
@@ -47,7 +50,7 @@ def corner_display(imgs, fe):
         dst = cv2.goodFeaturesToTrack(img, 300, 0.01, 10, blockSize=3, k=0.04)
         dst = dst.astype(int)
         points = list(np.squeeze(dst).T)
-        im3.append(utils.draw_keypoints(img, points, (255, 1, 1)))
+        im3.append(utils.draw_keypoints(img, points, (0, 255, 0)))
     # utils.plot_imgs(im3, ylabel='Shi', dpi=200, cmap='gray', titles=titles)
 
     img_final.append(im3)
@@ -105,6 +108,8 @@ def match(imgs1, imgs2, fe):
         if img3.shape[-1] == 3:
             img3 = img3[..., ::-1]  # BGR to RGB
         ax[i][0].imshow(img3)
+        ax[i][0].set_xticks([])
+        ax[i][0].set_yticks([])
 
         sift = cv2.xfeatures2d.SIFT_create()
         kp1, des1 = sift.detectAndCompute(img1, None)
@@ -117,18 +122,24 @@ def match(imgs1, imgs2, fe):
                 good.append([m])
         img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, good, None, flags=2)
         ax[i][1].imshow(img3)
+        ax[i][1].set_xticks([])
+        ax[i][1].set_yticks([])
 
         for m, n in matches:
             if m.distance < 0.42 * n.distance:
                 good.append([m])
         img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, good, None, flags=2)
         ax[i][2].imshow(img3)
+        ax[i][2].set_xticks([])
+        ax[i][2].set_yticks([])
 
         for m, n in matches:
             if m.distance < 0.45 * n.distance:
                 good.append([m])
         img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, good, None, flags=2)
         ax[i][3].imshow(img3)
+        ax[i][3].set_xticks([])
+        ax[i][3].set_yticks([])
 
 
         # Too bad of superpoints
@@ -153,7 +164,8 @@ def match(imgs1, imgs2, fe):
         # ax[3].imshow(img4)
 
     plt.tight_layout()
-    # plt.savefig('matcher.png')
+    plt.subplots_adjust(wspace=-0.6, hspace=0.05)
+    plt.savefig('matcher.png')
     plt.show()
 
 if __name__ == '__main__':
