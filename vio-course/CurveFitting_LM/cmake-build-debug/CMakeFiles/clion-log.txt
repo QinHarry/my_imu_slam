@@ -1,0 +1,26 @@
+/home/hao/Documents/clion-2019.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/hao/paper/CurveFitting_LM
+-- The C compiler identification is GNU 7.4.0
+-- The CXX compiler identification is GNU 7.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenMP_C: -fopenmp (found version "4.5") 
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5")  
+OPENMP FOUND
+-- No preference for use of exported Eigen CMake configuration set, and no hints for include directory provided. Defaulting to preferring an installed/exported Eigen CMake configuration if available.
+-- Found installed version of Eigen: /usr/lib/cmake/eigen3
+-- Found Eigen: /usr/include/eigen3 (found version "3.3.4") 
+-- Found OpenCV: /usr (found version "3.2.0") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/hao/paper/CurveFitting_LM/cmake-build-debug
